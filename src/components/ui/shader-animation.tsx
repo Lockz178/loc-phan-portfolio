@@ -82,20 +82,35 @@ export function ShaderAnimation() {
     onWindowResize();
     window.addEventListener("resize", onWindowResize, false);
 
+    sceneRef.current = { camera, scene, renderer, uniforms, animationId: 0 };
+
     const animate = () => {
-      const animationId = requestAnimationFrame(animate);
       uniforms.time.value += 0.05;
       renderer.render(scene, camera);
       if (sceneRef.current) {
-        sceneRef.current.animationId = animationId;
+        sceneRef.current.animationId = requestAnimationFrame(animate);
       }
     };
 
-    sceneRef.current = { camera, scene, renderer, uniforms, animationId: 0 };
-
-    animate();
+    // Only run the render loop while visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!sceneRef.current) return;
+        if (entries[0].isIntersecting) {
+          if (sceneRef.current.animationId === 0) {
+            sceneRef.current.animationId = requestAnimationFrame(animate);
+          }
+        } else {
+          cancelAnimationFrame(sceneRef.current.animationId);
+          sceneRef.current.animationId = 0;
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(container);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", onWindowResize);
       if (sceneRef.current) {
         cancelAnimationFrame(sceneRef.current.animationId);

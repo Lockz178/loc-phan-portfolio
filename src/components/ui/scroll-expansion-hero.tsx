@@ -36,70 +36,81 @@ const ScrollExpandMedia = ({
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [showContent, setShowContent]       = useState<boolean>(false);
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState<boolean>(false);
-  const [touchStartY, setTouchStartY]       = useState<number>(0);
   const [isMobileState, setIsMobileState]   = useState<boolean>(false);
 
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  // Refs so event handlers always see current values without re-registering
+  const progressRef        = useRef(0);
+  const expandedRef        = useRef(false);
+  const touchStartYRef     = useRef(0);
+  const rafRef             = useRef<number | null>(null);
 
   useEffect(() => {
+    progressRef.current = 0;
+    expandedRef.current = false;
     setScrollProgress(0);
     setShowContent(false);
     setMediaFullyExpanded(false);
   }, [mediaType]);
 
+  // Register event listeners ONCE — handlers read from refs, never stale
   useEffect(() => {
-    const handleWheel = (e: Event) => {
-      const we = e as unknown as WheelEvent;
-      if (mediaFullyExpanded && we.deltaY < 0 && window.scrollY <= 5) {
-        setMediaFullyExpanded(false);
-        e.preventDefault();
-      } else if (!mediaFullyExpanded) {
-        e.preventDefault();
-        const scrollDelta = we.deltaY * 0.0009;
-        const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1);
-        setScrollProgress(newProgress);
-        if (newProgress >= 1) {
-          setMediaFullyExpanded(true);
-          setShowContent(true);
-        } else if (newProgress < 0.75) {
-          setShowContent(false);
-        }
+    const commit = (newProgress: number) => {
+      progressRef.current = newProgress;
+      // Throttle React re-renders to one per animation frame
+      if (rafRef.current === null) {
+        rafRef.current = requestAnimationFrame(() => {
+          setScrollProgress(progressRef.current);
+          rafRef.current = null;
+        });
+      }
+      if (newProgress >= 1) {
+        expandedRef.current = true;
+        setMediaFullyExpanded(true);
+        setShowContent(true);
+      } else if (newProgress < 0.75) {
+        setShowContent(false);
       }
     };
 
-    const handleTouchStart = (e: Event) => {
-      const te = e as unknown as TouchEvent;
-      setTouchStartY(te.touches[0].clientY);
-    };
-
-    const handleTouchMove = (e: Event) => {
-      if (!touchStartY) return;
-      const te = e as unknown as TouchEvent;
-      const touchY = te.touches[0].clientY;
-      const deltaY = touchStartY - touchY;
-
-      if (mediaFullyExpanded && deltaY < -20 && window.scrollY <= 5) {
+    const handleWheel = (e: WheelEvent) => {
+      if (expandedRef.current && e.deltaY < 0 && window.scrollY <= 5) {
+        expandedRef.current = false;
         setMediaFullyExpanded(false);
         e.preventDefault();
-      } else if (!mediaFullyExpanded) {
+        return;
+      }
+      if (!expandedRef.current) {
         e.preventDefault();
-        const scrollFactor = deltaY < 0 ? 0.008 : 0.005;
-        const newProgress = Math.min(Math.max(scrollProgress + deltaY * scrollFactor, 0), 1);
-        setScrollProgress(newProgress);
-        if (newProgress >= 1) {
-          setMediaFullyExpanded(true);
-          setShowContent(true);
-        } else if (newProgress < 0.75) {
-          setShowContent(false);
-        }
-        setTouchStartY(touchY);
+        const delta = e.deltaY * 0.0009;
+        commit(Math.min(Math.max(progressRef.current + delta, 0), 1));
       }
     };
 
-    const handleTouchEnd = () => setTouchStartY(0);
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartYRef.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!touchStartYRef.current) return;
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartYRef.current - touchY;
+
+      if (expandedRef.current && deltaY < -20 && window.scrollY <= 5) {
+        expandedRef.current = false;
+        setMediaFullyExpanded(false);
+        e.preventDefault();
+      } else if (!expandedRef.current) {
+        e.preventDefault();
+        const factor = deltaY < 0 ? 0.008 : 0.005;
+        commit(Math.min(Math.max(progressRef.current + deltaY * factor, 0), 1));
+        touchStartYRef.current = touchY;
+      }
+    };
+
+    const handleTouchEnd = () => { touchStartYRef.current = 0; };
 
     const handleScroll = () => {
-      if (!mediaFullyExpanded) window.scrollTo(0, 0);
+      if (!expandedRef.current) window.scrollTo(0, 0);
     };
 
     window.addEventListener('wheel',      handleWheel,      { passive: false });
@@ -114,8 +125,9 @@ const ScrollExpandMedia = ({
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove',  handleTouchMove);
       window.removeEventListener('touchend',   handleTouchEnd);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
-  }, [scrollProgress, mediaFullyExpanded, touchStartY]);
+  }, []); // ← runs once, never re-registers
 
   useEffect(() => {
     const check = () => setIsMobileState(window.innerWidth < 768);
@@ -128,15 +140,17 @@ const ScrollExpandMedia = ({
   const mediaHeight    = 400 + scrollProgress * (isMobileState ? 200  : 400);
   const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
 
-  const firstWord   = title ? title.split(' ')[0] : '';
-  const restOfTitle = title ? title.split(' ').slice(1).join(' ') : '';
+  // Split title evenly: "Phan Ngoc" / "Phuoc Loc"
+  const words       = title ? title.split(' ') : [];
+  const half        = Math.ceil(words.length / 2);
+  const firstHalf   = words.slice(0, half).join(' ');
+  const secondHalf  = words.slice(half).join(' ');
 
   return (
     <div
       id={id}
-      ref={sectionRef}
-      className='overflow-x-hidden'
       style={{ background: '#000' }}
+      className='overflow-x-hidden'
     >
       <section className='relative flex flex-col items-center justify-start min-h-[100dvh]'>
         <div className='relative w-full flex flex-col items-center min-h-[100dvh]'>
@@ -235,7 +249,7 @@ const ScrollExpandMedia = ({
                   </div>
                 )}
 
-                {/* Subtitle row (date / scrollToExpand) */}
+                {/* Subtitle row */}
                 <div className='flex flex-col items-center text-center relative z-10 mt-4' style={{ transition: 'none' }}>
                   {date && (
                     <p
@@ -256,7 +270,7 @@ const ScrollExpandMedia = ({
                 </div>
               </div>
 
-              {/* Split title words */}
+              {/* Split title — even halves */}
               <div
                 className={`flex items-center justify-center text-center gap-6 w-full relative z-10 flex-col ${
                   textBlend ? 'mix-blend-difference' : 'mix-blend-normal'
@@ -273,7 +287,7 @@ const ScrollExpandMedia = ({
                     transition: 'none',
                   }}
                 >
-                  {firstWord}
+                  {firstHalf}
                 </motion.h2>
                 <motion.h2
                   className='font-bold text-blue-200'
@@ -285,7 +299,7 @@ const ScrollExpandMedia = ({
                     transition: 'none',
                   }}
                 >
-                  {restOfTitle}
+                  {secondHalf}
                 </motion.h2>
               </div>
             </div>

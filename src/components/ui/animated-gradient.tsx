@@ -312,9 +312,26 @@ export default function AnimatedGradient({
       frameIdRef.current = requestAnimationFrame(animate);
     };
 
-    frameIdRef.current = requestAnimationFrame(animate);
+    // Only run while visible
+    const visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          if (frameIdRef.current === undefined) {
+            frameIdRef.current = requestAnimationFrame(animate);
+          }
+        } else {
+          if (frameIdRef.current !== undefined) {
+            cancelAnimationFrame(frameIdRef.current);
+            frameIdRef.current = undefined;
+          }
+        }
+      },
+      { threshold: 0 }
+    );
+    visibilityObserver.observe(container);
 
     return () => {
+      visibilityObserver.disconnect();
       if (frameIdRef.current !== undefined) cancelAnimationFrame(frameIdRef.current);
       resizeObserver.disconnect();
       gl.deleteProgram(program);

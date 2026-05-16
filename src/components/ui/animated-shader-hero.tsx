@@ -121,9 +121,27 @@ void main(){gl_Position=position;}`;
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       animFrameRef.current = requestAnimationFrame(loop);
     };
-    animFrameRef.current = requestAnimationFrame(loop);
+
+    // Only animate while visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          if (!animFrameRef.current) {
+            animFrameRef.current = requestAnimationFrame(loop);
+          }
+        } else {
+          if (animFrameRef.current) {
+            cancelAnimationFrame(animFrameRef.current);
+            animFrameRef.current = undefined;
+          }
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
       gl.deleteProgram(prog);
