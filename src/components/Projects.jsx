@@ -20,7 +20,16 @@ const projects = [
     title:  'StudyFlow App',
     desc:   'A Flutter study planning application that helps users organize study plans, view study tips, and manage learning activities. Features navigation, persistent settings via SharedPreferences, study plan models, and a built-in tips library.',
     highlights: ['Cross-platform mobile', 'State management', 'Persistent storage'],
-    link:   'https://github.com/Lockz178',
+    link:   'https://github.com/Lockz178/studyflow-app',
+  },
+  {
+    number: '03',
+    accent: '#34c759',
+    tag:    'Python · AI · Distributed Systems · DevOps',
+    title:  'Distributed AI Ops Challenge',
+    desc:   'A distributed AI operations challenge project exploring orchestration, monitoring, and deployment of AI workloads across distributed infrastructure.',
+    highlights: ['Distributed systems', 'AI orchestration', 'DevOps pipelines'],
+    link:   'https://github.com/Lockz178/distributed-ai-ops-challenge',
   },
 ]
 
