@@ -7,10 +7,11 @@ const projects = [
   {
     number: '01',
     accent: '#0066cc',
+    badge:  'In use at TAMK',
     tag:    'Node.js · Express.js · Raspberry Pi · GitLab',
     title:  'A3 Info Screen',
-    desc:   'A Raspberry Pi-based digital signage system for a school information screen. Displays images and videos in fullscreen slideshow mode with a web dashboard for uploading and managing media files. Designed to run in kiosk mode on a TV or large display.',
-    highlights: ['Fullscreen kiosk mode', 'Web upload dashboard', 'Media file management'],
+    desc:   'A Raspberry Pi digital signage system built for Tampere University of Applied Sciences — deployed on campus and used by the school to display announcements, images, and videos in fullscreen kiosk mode, all managed through a web upload dashboard.',
+    highlights: ['Deployed & running at TAMK', 'Fullscreen kiosk mode', 'Web upload dashboard'],
     link:   'https://github.com/Lockz178/a3-info-screen',
   },
   {
@@ -48,7 +49,14 @@ function ProjectCard({ project, delay }) {
     >
       <div className="project-card-header" style={{ '--accent': project.accent }}>
         <span className="project-number">{project.number}</span>
-        <div className="project-accent-bar" />
+        {project.badge ? (
+          <span className="project-badge">
+            <span className="project-badge-dot" />
+            {project.badge}
+          </span>
+        ) : (
+          <div className="project-accent-bar" />
+        )}
       </div>
       <div className="project-card-body">
         <span className="project-tag">{project.tag}</span>
