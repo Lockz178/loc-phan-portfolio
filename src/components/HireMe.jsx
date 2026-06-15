@@ -4,8 +4,7 @@ export default function HireMe() {
   return (
     <ShaderHero
       trustBadge={{
-        text: 'Open to internships & junior roles — 2026',
-        icons: ['✨'],
+        text: 'Open to internships & junior roles',
       }}
       headline={{
         line1: "Let's Build",
