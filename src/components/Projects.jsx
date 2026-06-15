@@ -11,7 +11,7 @@ const projects = [
     title:  'A3 Info Screen',
     desc:   'A Raspberry Pi-based digital signage system for a school information screen. Displays images and videos in fullscreen slideshow mode with a web dashboard for uploading and managing media files. Designed to run in kiosk mode on a TV or large display.',
     highlights: ['Fullscreen kiosk mode', 'Web upload dashboard', 'Media file management'],
-    link:   'https://github.com/Lockz178',
+    link:   'https://github.com/Lockz178/a3-info-screen',
   },
   {
     number: '02',
