@@ -3,7 +3,15 @@ import { SpecialText } from './ui/special-text'
 
 const items = [
   {
-    date:     '2024 — 2028',
+    date:     '2024 — 2025',
+    type:     'Education',
+    title:    'Bachelor of Engineering — Information Technology',
+    org:      'South-Eastern Finland University of Applied Sciences (XAMK)',
+    location: 'Mikkeli, Finland',
+    desc:     'Completed my first year of IT engineering studies — programming fundamentals, mathematics, and core computing courses — before transferring to TAMK to continue toward Software Engineering.',
+  },
+  {
+    date:     '2025 — 2028',
     type:     'Education',
     title:    'Bachelor of Engineering — Software Engineering',
     org:      'Tampere University of Applied Sciences (TAMK)',
