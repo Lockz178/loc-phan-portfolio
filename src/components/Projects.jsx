@@ -23,6 +23,7 @@ const projects = [
     desc:   'A real-time collaborative rich-text editor — type together, see each other’s cursors live, and merge every edit conflict-free with CRDTs. Fully peer-to-peer over WebRTC with no backend server, offline-first persistence, and shareable rooms via URL.',
     highlights: ['Conflict-free CRDT editing', 'Live multiplayer cursors', 'Serverless P2P over WebRTC'],
     link:   'https://github.com/Lockz178/collabedit',
+    live:   'https://collabedit-live.vercel.app',
   },
   {
     number: '03',
@@ -77,12 +78,22 @@ function ProjectCard({ project, delay }) {
             <li key={h}><span className="highlight-dot" style={{ background: project.accent }} />{h}</li>
           ))}
         </ul>
-        <a href={project.link} className="project-link" target="_blank" rel="noopener">
-          View on GitHub
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5M11.5 2.5V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </a>
+        <div className="project-links">
+          {project.live && (
+            <a href={project.live} className="project-link project-link-live" style={{ '--accent': project.accent }} target="_blank" rel="noopener">
+              Live Demo
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5M11.5 2.5V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          )}
+          <a href={project.link} className="project-link" target="_blank" rel="noopener">
+            View on GitHub
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5M11.5 2.5V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </motion.div>
   )

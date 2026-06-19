@@ -812,6 +812,18 @@ body {
 
 .project-link:hover { gap: 10px; opacity: 0.8; }
 
+.project-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.project-link-live {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ── Timeline ─────────────────────────────────────────────── */
 .timeline {
   display: flex;
