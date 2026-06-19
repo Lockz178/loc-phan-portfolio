@@ -16,6 +16,16 @@ const projects = [
   },
   {
     number: '02',
+    accent: '#ff375f',
+    badge:  'Flagship',
+    tag:    'React · TypeScript · Yjs · CRDTs · WebRTC · Tiptap',
+    title:  'CollabEdit',
+    desc:   'A real-time collaborative rich-text editor — type together, see each other’s cursors live, and merge every edit conflict-free with CRDTs. Fully peer-to-peer over WebRTC with no backend server, offline-first persistence, and shareable rooms via URL.',
+    highlights: ['Conflict-free CRDT editing', 'Live multiplayer cursors', 'Serverless P2P over WebRTC'],
+    link:   'https://github.com/Lockz178/collabedit',
+  },
+  {
+    number: '03',
     accent: '#5856d6',
     tag:    'Flutter · Dart · Provider · GoRouter',
     title:  'StudyFlow App',
@@ -24,7 +34,7 @@ const projects = [
     link:   'https://github.com/Lockz178/studyflow-app',
   },
   {
-    number: '03',
+    number: '04',
     accent: '#34c759',
     tag:    'Python · AI · Distributed Systems · DevOps',
     title:  'Distributed AI Ops Challenge',
