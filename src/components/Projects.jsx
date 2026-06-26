@@ -27,6 +27,15 @@ const projects = [
   },
   {
     number: '03',
+    accent: '#00add8',
+    tag:    'Go · Raft Consensus · Distributed Systems · Docker',
+    title:  'Raft KV Store',
+    desc:   'A distributed, fault-tolerant key-value store implementing the Raft consensus algorithm from scratch in pure Go — zero dependencies. Handles leader election, log replication, and snapshotting while staying consistent through node crashes and network partitions. Ships with a live cluster dashboard, REST API, a raftctl CLI, and a one-command 5-node Docker cluster.',
+    highlights: ['Raft consensus from scratch', 'Survives crashes & partitions', 'Live 5-node Docker cluster'],
+    link:   'https://github.com/Lockz178/raft-kv',
+  },
+  {
+    number: '04',
     accent: '#5856d6',
     tag:    'Flutter · Dart · Provider · GoRouter',
     title:  'StudyFlow App',
@@ -35,7 +44,7 @@ const projects = [
     link:   'https://github.com/Lockz178/studyflow-app',
   },
   {
-    number: '04',
+    number: '05',
     accent: '#34c759',
     tag:    'Python · AI · Distributed Systems · DevOps',
     title:  'Distributed AI Ops Challenge',
