@@ -5,6 +5,18 @@ export default function ShaderVisual() {
     <div style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#000' }}>
       <ShaderAnimation />
 
+      {/* Soft dark scrim so the headline stays legible over the bright shader */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 5,
+          pointerEvents: 'none',
+          background:
+            'radial-gradient(ellipse 46% 34% at 50% 46%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 45%, transparent 72%)',
+        }}
+      />
+
       {/* Centered text overlay */}
       <div
         style={{
@@ -22,39 +34,42 @@ export default function ShaderVisual() {
           style={{
             fontSize: '11px',
             fontWeight: 600,
-            letterSpacing: '0.14em',
+            letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.4)',
+            color: 'rgba(255,255,255,0.45)',
             marginBottom: '16px',
           }}
         >
-          Under Construction
+          Approach
         </p>
         <h2
           style={{
-            fontFamily: '"SF Pro Display", system-ui, -apple-system, sans-serif',
-            fontSize: 'clamp(36px, 6vw, 80px)',
+            fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+            fontSize: 'clamp(38px, 6.5vw, 84px)',
             fontWeight: 700,
             color: '#ffffff',
-            letterSpacing: '-2px',
-            lineHeight: 1.05,
+            letterSpacing: '-0.04em',
+            lineHeight: 1.02,
             textAlign: 'center',
-            maxWidth: '700px',
+            maxWidth: '760px',
             padding: '0 24px',
           }}
         >
-          Always Learning,<br />Always Building.
+          Always learning.<br />Always building.
         </h2>
         <p
           style={{
-            marginTop: '20px',
-            fontSize: '16px',
-            color: 'rgba(255,255,255,0.4)',
-            fontWeight: 300,
-            letterSpacing: '0.02em',
+            marginTop: '22px',
+            fontSize: '17px',
+            color: 'rgba(255,255,255,0.5)',
+            fontWeight: 400,
+            letterSpacing: '0.01em',
+            maxWidth: '520px',
+            textAlign: 'center',
+            padding: '0 24px',
           }}
         >
-          More projects coming soon.
+          Currently going deep on distributed systems, consensus algorithms, and AI infrastructure.
         </p>
       </div>
 

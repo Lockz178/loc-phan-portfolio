@@ -9,7 +9,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section className="section tile-light" id="about">
+    <section className="section tile-parchment" id="about">
       <div className="about-inner container">
 
         <FadeIn className="about-photo-wrap" x={-32} y={0}>
