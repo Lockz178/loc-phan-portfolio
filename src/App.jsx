@@ -20,11 +20,11 @@ export default function App() {
         <About />
         <Skills />
         <Projects />
-        <Suspense fallback={<div style={{ height: '100vh', background: '#000' }} />}>
+        <Suspense fallback={<div style={{ height: '100vh', background: '#08080a' }} />}>
           <ShaderVisual />
         </Suspense>
         <Experience />
-        <Suspense fallback={<div style={{ height: '100vh', background: '#000' }} />}>
+        <Suspense fallback={<div style={{ minHeight: '420px' }} />}>
           <HireMe />
         </Suspense>
         <Contact />

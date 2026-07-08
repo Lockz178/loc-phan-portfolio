@@ -1,7 +1,6 @@
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
 import FadeIn from './FadeIn'
-import AnimatedGradient from './ui/animated-gradient'
 import { SpecialText } from './ui/special-text'
 
 const categories = [
@@ -77,24 +76,13 @@ function SkillCategory({ category, delay }) {
 
 export default function Skills() {
   return (
-    <section
-      className="section tile-dark"
-      id="skills"
-      style={{ position: 'relative', overflow: 'hidden', background: 'transparent' }}
-    >
-      {/* WebGL animated gradient — Prism preset (dark → blue, matches portfolio accent) */}
-      <AnimatedGradient
-        config={{ preset: 'Prism' }}
-        noise={{ opacity: 0.4, scale: 0.8 }}
-      />
-
-      {/* All content sits above the gradient */}
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+    <section className="section tile-light" id="skills">
+      <div className="container">
         <FadeIn>
-          <p className="section-eyebrow on-dark">
+          <p className="section-eyebrow">
             <SpecialText inView={true} speed={18}>Technical Stack</SpecialText>
           </p>
-          <h2 className="section-headline on-dark">Skills</h2>
+          <h2 className="section-headline">Skills</h2>
         </FadeIn>
         <div className="skills-grid">
           {categories.map((cat, i) => (

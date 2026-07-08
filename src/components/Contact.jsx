@@ -38,7 +38,7 @@ function ContactCard({ channel, delay }) {
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay, ease: [0.25, 0.1, 0.25, 1] }}
-      whileHover={{ y: -4, borderColor: 'rgba(255,255,255,0.25)' }}
+      whileHover={{ y: -4 }}
     >
       <span className="contact-card-icon">{channel.icon}</span>
       <div>
@@ -54,13 +54,13 @@ function ContactCard({ channel, delay }) {
 
 export default function Contact() {
   return (
-    <section className="section tile-dark" id="contact">
+    <section className="section tile-light" id="contact">
       <div className="container">
         <FadeIn>
-          <p className="section-eyebrow on-dark">
+          <p className="section-eyebrow">
             <SpecialText inView={true} speed={16}>Let's Connect</SpecialText>
           </p>
-          <h2 className="section-headline on-dark">Get in Touch</h2>
+          <h2 className="section-headline">Get in Touch</h2>
         </FadeIn>
         <FadeIn delay={0.1}>
           <p className="contact-intro">
