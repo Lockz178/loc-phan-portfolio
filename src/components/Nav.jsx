@@ -6,7 +6,7 @@ export default function Nav() {
     <>
       <AnimatedNavFramer />
       <div style={{ position: 'fixed', top: '18px', right: '24px', zIndex: 51 }}>
-        <ThemeToggle defaultTheme="light" buttonSize={32} />
+        <ThemeToggle defaultTheme="dark" buttonSize={32} />
       </div>
     </>
   )
