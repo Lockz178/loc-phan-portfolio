@@ -100,6 +100,7 @@ export function ThemeToggle({
       onThemeChange?.(next)
       if (next === "dark") document.documentElement.classList.add("dark")
       else                 document.documentElement.classList.remove("dark")
+      try { localStorage.setItem("theme", next) } catch (e) { /* storage unavailable */ }
       setPhase("rising")
       setTimeout(() => setPhase("idle"), duration + 60)
     }, duration)
