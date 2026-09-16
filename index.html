@@ -3,22 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loc Phan — Software Engineering Student</title>
-    <meta name="description" content="Personal portfolio of Loc Phan, software engineering student at Tampere University of Applied Sciences." />
+
+    <title>Phan Ngoc Phuoc Loc | Software Engineering Student</title>
+    <meta name="description" content="Portfolio of Phan Ngoc Phuoc Loc, a full-stack software engineering student at Tampere University of Applied Sciences (Finland). React, Node.js, Flutter, PostgreSQL, and distributed systems projects." />
+    <meta name="keywords" content="Phan Ngoc Phuoc Loc, Loc Phan, software engineer portfolio, full-stack developer, React developer, Node.js, TAMK, Tampere University of Applied Sciences, Vietnam, Finland" />
+    <meta name="author" content="Phan Ngoc Phuoc Loc" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://loc-phan-portfolio.vercel.app/" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
     <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0d0d0f" />
+
+    <!-- Open Graph / Facebook, LinkedIn -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Phan Ngoc Phuoc Loc Portfolio" />
+    <meta property="og:url" content="https://loc-phan-portfolio.vercel.app/" />
+    <meta property="og:title" content="Phan Ngoc Phuoc Loc | Software Engineering Student" />
+    <meta property="og:description" content="Full-stack software engineering student at TAMK, Finland. React, Node.js, Flutter, PostgreSQL, and distributed systems projects." />
+    <meta property="og:image" content="https://loc-phan-portfolio.vercel.app/avatar.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Phan Ngoc Phuoc Loc | Software Engineering Student" />
+    <meta name="twitter:description" content="Full-stack software engineering student at TAMK, Finland. React, Node.js, Flutter, PostgreSQL, and distributed systems projects." />
+    <meta name="twitter:image" content="https://loc-phan-portfolio.vercel.app/avatar.png" />
+
     <!-- Apply saved theme before paint. Default = dark; only switch to light if the user chose it last time. -->
     <script>
-      (function () {
+      (() => {
         try {
           if (localStorage.getItem('theme') === 'light') {
             document.documentElement.classList.remove('dark');
           }
-        } catch (e) {}
+        } catch {}
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Phan Ngoc Phuoc Loc",
+        "alternateName": "Loc Phan",
+        "url": "https://loc-phan-portfolio.vercel.app/",
+        "image": "https://loc-phan-portfolio.vercel.app/avatar.png",
+        "jobTitle": "Software Engineering Student",
+        "description": "Full-stack software engineering student at Tampere University of Applied Sciences, originally from Ho Chi Minh City, Vietnam.",
+        "email": "mailto:phuocloc5406@gmail.com",
+        "nationality": "Vietnamese",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Tampere University of Applied Sciences",
+          "sameAs": "https://www.tuni.fi/en/tamk"
+        },
+        "sameAs": [
+          "https://github.com/Lockz178",
+          "https://www.linkedin.com/in/ngoc-phuoc-loc-phan-117146330/"
+        ],
+        "knowsAbout": ["React", "Node.js", "Flutter", "PostgreSQL", "SQLite", "Linux server administration", "Distributed systems"]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

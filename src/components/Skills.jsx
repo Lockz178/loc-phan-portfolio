@@ -6,43 +6,82 @@ import { SpecialText } from './ui/special-text'
 const categories = [
   {
     title: 'Programming Languages',
-    icon:  '{ }',
-    chips: ['JavaScript', 'Python', 'Dart', 'Java', 'C++', 'SQL', 'HTML', 'CSS'],
+    icon: '{ }',
+    chips: [
+      'JavaScript',
+      'Python',
+      'Dart',
+      'Java',
+      'C++',
+      'SQL',
+      'HTML',
+      'CSS',
+    ],
   },
   {
     title: 'Frontend / Mobile',
-    icon:  '◻',
+    icon: '◻',
     chips: ['React', 'Flutter', 'Responsive UI', 'HTML/CSS Layouts'],
   },
   {
     title: 'Backend',
-    icon:  '⌁',
-    chips: ['Node.js', 'Express.js', 'REST APIs', 'File Handling', 'Server Routing'],
+    icon: '⌁',
+    chips: [
+      'Node.js',
+      'Express.js',
+      'REST APIs',
+      'File Handling',
+      'Server Routing',
+    ],
   },
   {
     title: 'Databases & Data',
-    icon:  '▤',
+    icon: '▤',
     chips: ['PostgreSQL', 'SQLite', 'Power BI', 'Data Modeling'],
   },
   {
     title: 'DevOps & Systems',
-    icon:  '⚙',
-    chips: ['Linux', 'Ubuntu Server', 'Apache', 'Docker', 'Ansible', 'SSH', 'NFS', 'Raspberry Pi'],
+    icon: '⚙',
+    chips: [
+      'Linux',
+      'Ubuntu Server',
+      'Apache',
+      'Docker',
+      'Ansible',
+      'SSH',
+      'NFS',
+      'Raspberry Pi',
+    ],
   },
   {
     title: 'Tools & Workflow',
-    icon:  '◈',
-    chips: ['Git', 'GitHub', 'GitLab', 'VS Code', 'Android Studio', 'PowerShell', 'Bash', 'Cursor'],
+    icon: '◈',
+    chips: [
+      'Git',
+      'GitHub',
+      'GitLab',
+      'VS Code',
+      'Android Studio',
+      'PowerShell',
+      'Bash',
+      'Cursor',
+    ],
   },
   {
     title: 'Embedded & IoT',
-    icon:  '⊞',
-    chips: ['Arduino', 'ESP8266', 'Sensors', 'Motor Control', 'Device Communication'],
+    icon: '⊞',
+    chips: [
+      'Arduino',
+      'ESP8266',
+      'Sensors',
+      'Motor Control',
+      'Device Communication',
+    ],
   },
 ]
 
 function SkillCategory({ category, delay }) {
-  const ref    = useRef(null)
+  const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px 0px' })
 
   return (
@@ -54,7 +93,9 @@ function SkillCategory({ category, delay }) {
       transition={{ duration: 0.55, delay, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <div className="skill-card-header">
-        <span className="skill-icon" aria-hidden="true">{category.icon}</span>
+        <span className="skill-icon" aria-hidden="true">
+          {category.icon}
+        </span>
         <h3 className="skill-cat-title">{category.title}</h3>
       </div>
       <div className="skill-chips">
@@ -64,7 +105,11 @@ function SkillCategory({ category, delay }) {
             className="chip"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.28, delay: delay + 0.04 * i, ease: 'easeOut' }}
+            transition={{
+              duration: 0.28,
+              delay: delay + 0.04 * i,
+              ease: 'easeOut',
+            }}
           >
             {chip}
           </motion.span>
@@ -80,7 +125,9 @@ export default function Skills() {
       <div className="container">
         <FadeIn>
           <p className="section-eyebrow">
-            <SpecialText inView={true} speed={18}>Technical Stack</SpecialText>
+            <SpecialText inView={true} speed={18}>
+              Technical Stack
+            </SpecialText>
           </p>
           <h2 className="section-headline">Skills</h2>
         </FadeIn>

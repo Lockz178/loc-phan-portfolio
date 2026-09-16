@@ -5,27 +5,27 @@ import { SpecialText } from './ui/special-text'
 
 const channels = [
   {
-    icon:  '✉',
+    icon: '✉',
     label: 'Email',
     value: 'phuocloc5406@gmail.com',
-    href:  'mailto:phuocloc5406@gmail.com',
+    href: 'mailto:phuocloc5406@gmail.com',
   },
   {
-    icon:  '⌥',
+    icon: '⌥',
     label: 'GitHub',
     value: 'github.com/Lockz178',
-    href:  'https://github.com/Lockz178',
+    href: 'https://github.com/Lockz178',
   },
   {
-    icon:  'in',
+    icon: 'in',
     label: 'LinkedIn',
     value: 'Ngoc Phuoc Loc Phan',
-    href:  'https://www.linkedin.com/in/ngoc-phuoc-loc-phan-117146330/',
+    href: 'https://www.linkedin.com/in/ngoc-phuoc-loc-phan-117146330/',
   },
 ]
 
 function ContactCard({ channel, delay }) {
-  const ref    = useRef(null)
+  const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px 0px' })
 
   return (
@@ -45,8 +45,21 @@ function ContactCard({ channel, delay }) {
         <p className="contact-card-label">{channel.label}</p>
         <p className="contact-card-value">{channel.value}</p>
       </div>
-      <svg className="contact-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <svg
+        className="contact-card-arrow"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M3 13L13 3M13 3H6M13 3V10"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     </motion.a>
   )
@@ -58,13 +71,17 @@ export default function Contact() {
       <div className="container">
         <FadeIn>
           <p className="section-eyebrow">
-            <SpecialText inView={true} speed={16}>Let's Connect</SpecialText>
+            <SpecialText inView={true} speed={16}>
+              Let's Connect
+            </SpecialText>
           </p>
           <h2 className="section-headline">Get in Touch</h2>
         </FadeIn>
         <FadeIn delay={0.1}>
           <p className="contact-intro">
-            I'm open to internship opportunities, junior developer roles, and interesting software projects. Feel free to reach out through any of these channels.
+            I'm open to internship opportunities, junior developer roles, and
+            interesting software projects. Feel free to reach out through any of
+            these channels.
           </p>
         </FadeIn>
 
@@ -73,7 +90,6 @@ export default function Contact() {
             <ContactCard key={c.label} channel={c} delay={i * 0.1} />
           ))}
         </div>
-
       </div>
     </section>
   )

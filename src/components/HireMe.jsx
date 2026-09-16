@@ -17,22 +17,36 @@ export default function HireMe() {
 
           <FadeIn delay={0.08}>
             <h2 className="cta-headline">
-              Let&apos;s build<br />
+              Let&apos;s build
+              <br />
               <span className="cta-headline-accent">something great.</span>
             </h2>
           </FadeIn>
 
           <FadeIn delay={0.16}>
             <p className="cta-sub">
-              I&apos;m a software engineering student from Vietnam studying at TAMK, Finland.
-              If you&apos;re looking for a motivated junior developer for your team, I&apos;d love to connect.
+              I&apos;m a software engineering student from Vietnam studying at
+              TAMK, Finland. If you&apos;re looking for a motivated junior
+              developer for your team, I&apos;d love to connect.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.24}>
             <div className="cta-actions">
-              <button className="btn-primary" onClick={scrollTo('contact')}>Get in Touch</button>
-              <button className="btn-secondary-pill" onClick={scrollTo('projects')}>View Projects</button>
+              <button
+                type="button"
+                className="btn-primary"
+                onClick={scrollTo('contact')}
+              >
+                Get in Touch
+              </button>
+              <button
+                type="button"
+                className="btn-secondary-pill"
+                onClick={scrollTo('projects')}
+              >
+                View Projects
+              </button>
             </div>
           </FadeIn>
         </div>

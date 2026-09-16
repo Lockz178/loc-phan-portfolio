@@ -1,47 +1,48 @@
-import React, { useMemo } from "react";
+import type React from 'react'
+import { useMemo } from 'react'
 
 interface FishyButtonProps {
-  children: React.ReactNode;
-  isDelete?: boolean;
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
-  className?: string;
-  fontFamily?: string;
-  borderRadius?: string;
-  width?: string;
-  height?: string;
-  fishSpeed?: string;
+  children: React.ReactNode
+  isDelete?: boolean
+  onClick?: () => void
+  type?: 'button' | 'submit' | 'reset'
+  className?: string
+  fontFamily?: string
+  borderRadius?: string
+  width?: string
+  height?: string
+  fishSpeed?: string
 }
 
 function getRandomId() {
-  return Math.random().toString(36).substring(2, 8);
+  return Math.random().toString(36).substring(2, 8)
 }
 
 export const FishyButton: React.FC<FishyButtonProps> = ({
   children,
   isDelete = false,
   onClick,
-  type = "button",
-  className = "",
+  type = 'button',
+  className = '',
   fontFamily,
-  borderRadius = "20px",
-  width = "140px",
-  height = "53px",
-  fishSpeed = "2.3s",
+  borderRadius = '20px',
+  width = '140px',
+  height = '53px',
+  fishSpeed = '2.3s',
 }) => {
-  const fishSpeedClass = useMemo(() => `fish-speed-${getRandomId()}`, []);
+  const fishSpeedClass = useMemo(() => `fish-speed-${getRandomId()}`, [])
 
   const buttonStyle: React.CSSProperties = {
     fontFamily: fontFamily ?? undefined,
     borderRadius,
     width,
     height,
-  };
+  }
 
   return (
     <button
       type={type}
-      className={`button ${isDelete ? "deleteButton" : ""} ${className} ${fishSpeedClass}`}
+      className={`button ${isDelete ? 'deleteButton' : ''} ${className} ${fishSpeedClass}`}
       onClick={onClick}
       style={buttonStyle}
     >
@@ -54,7 +55,10 @@ export const FishyButton: React.FC<FishyButtonProps> = ({
       <div className="bubble"></div>
       <div className="bubble"></div>
       <div className="bubble"></div>
-      <span className="button__text" style={{ fontFamily: fontFamily ?? undefined }}>
+      <span
+        className="button__text"
+        style={{ fontFamily: fontFamily ?? undefined }}
+      >
         {children}
       </span>
       <style>{`
@@ -187,7 +191,7 @@ export const FishyButton: React.FC<FishyButtonProps> = ({
   letter-spacing: 3px;
   color: #fff;
   transition: all ease 1s;
-  font-family: ${fontFamily ? fontFamily : "system-ui, -apple-system, sans-serif"};
+  font-family: ${fontFamily ? fontFamily : 'system-ui, -apple-system, sans-serif'};
 }
 .button:hover {
   background: var(--color_6);
@@ -306,5 +310,5 @@ export const FishyButton: React.FC<FishyButtonProps> = ({
 }
 `}</style>
     </button>
-  );
-};
+  )
+}

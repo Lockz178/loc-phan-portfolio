@@ -1,14 +1,14 @@
-import { motion } from "framer-motion";
-import { Circle } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { motion } from 'framer-motion'
+import { Circle } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface ElegantShapeProps {
-  className?: string;
-  delay?: number;
-  width?: number;
-  height?: number;
-  rotate?: number;
-  gradient?: string;
+  className?: string
+  delay?: number
+  width?: number
+  height?: number
+  rotate?: number
+  gradient?: string
 }
 
 function ElegantShape({
@@ -17,7 +17,7 @@ function ElegantShape({
   width = 400,
   height = 100,
   rotate = 0,
-  gradient = "from-white/[0.08]",
+  gradient = 'from-white/[0.08]',
 }: ElegantShapeProps) {
   return (
     <motion.div
@@ -29,28 +29,28 @@ function ElegantShape({
         ease: [0.23, 0.86, 0.39, 0.96],
         opacity: { duration: 1.2 },
       }}
-      className={cn("absolute", className)}
+      className={cn('absolute', className)}
     >
       <motion.div
         animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         style={{ width, height }}
         className="relative"
       >
         <div
           className={cn(
-            "absolute inset-0 rounded-full",
-            "bg-gradient-to-r to-transparent",
+            'absolute inset-0 rounded-full',
+            'bg-gradient-to-r to-transparent',
             gradient,
-            "backdrop-blur-[2px] border-2 border-white/[0.15]",
-            "shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]",
-            "after:absolute after:inset-0 after:rounded-full",
-            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]"
+            'backdrop-blur-[2px] border-2 border-white/[0.15]',
+            'shadow-[0_8px_32px_0_rgba(255,255,255,0.1)]',
+            'after:absolute after:inset-0 after:rounded-full',
+            'after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2),transparent_70%)]',
           )}
         />
       </motion.div>
     </motion.div>
-  );
+  )
 }
 
 /** All five floating shapes + ambient gradient — used as the background layer
@@ -106,21 +106,21 @@ export function GeometricBackground() {
       {/* Top/bottom fade vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40 pointer-events-none" />
     </>
-  );
+  )
 }
 
 /** Full standalone hero — use this if you ever want the badge + title text too. */
 export function HeroGeometric({
-  badge  = "Software Engineer · Vietnam → Finland",
-  title1 = "Phan Ngoc",
-  title2 = "Phuoc Loc",
+  badge = 'Software Engineer · Vietnam → Finland',
+  title1 = 'Phan Ngoc',
+  title2 = 'Phuoc Loc',
 }: {
-  badge?:  string;
-  title1?: string;
-  title2?: string;
+  badge?: string
+  title1?: string
+  title2?: string
 }) {
   const fadeUp = {
-    hidden:  { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
@@ -130,7 +130,7 @@ export function HeroGeometric({
         ease: [0.25, 0.4, 0.25, 1] as const,
       },
     }),
-  };
+  }
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
@@ -149,7 +149,12 @@ export function HeroGeometric({
             <span className="text-sm text-white/60 tracking-wide">{badge}</span>
           </motion.div>
 
-          <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible">
+          <motion.div
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
               <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
                 {title1}
@@ -161,7 +166,12 @@ export function HeroGeometric({
             </h1>
           </motion.div>
 
-          <motion.div custom={2} variants={fadeUp} initial="hidden" animate="visible">
+          <motion.div
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
             <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
               Software engineering student at TAMK, Finland. Building full-stack
               software from mobile apps to server infrastructure.
@@ -172,5 +182,5 @@ export function HeroGeometric({
 
       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />
     </div>
-  );
+  )
 }

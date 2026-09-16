@@ -1,14 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import type React from 'react'
+import { useEffect, useRef } from 'react'
 
 interface HeroProps {
-  trustBadge?: { text: string; icons?: string[] };
-  headline: { line1: string; line2: string };
-  subtitle: string;
+  trustBadge?: { text: string; icons?: string[] }
+  headline: { line1: string; line2: string }
+  subtitle: string
   buttons?: {
-    primary?:   { text: string; onClick?: () => void };
-    secondary?: { text: string; onClick?: () => void };
-  };
-  className?: string;
+    primary?: { text: string; onClick?: () => void }
+    secondary?: { text: string; onClick?: () => void }
+  }
+  className?: string
 }
 
 const defaultShaderSource = `#version 300 es
@@ -61,97 +62,101 @@ void main(void) {
     col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
   }
   O=vec4(col,1);
-}`;
+}`
 
 const useShaderBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animFrameRef = useRef<number>();
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animFrameRef = useRef<number>()
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvas = canvasRef.current
+    if (!canvas) return
 
-    const gl = canvas.getContext('webgl2');
-    if (!gl) return;
+    const gl = canvas.getContext('webgl2')
+    if (!gl) return
 
-    const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+    const dpr = Math.max(1, 0.5 * window.devicePixelRatio)
 
     const resize = () => {
-      canvas.width  = window.innerWidth  * dpr;
-      canvas.height = window.innerHeight * dpr;
-      gl.viewport(0, 0, canvas.width, canvas.height);
-    };
-    resize();
-    window.addEventListener('resize', resize);
+      canvas.width = window.innerWidth * dpr
+      canvas.height = window.innerHeight * dpr
+      gl.viewport(0, 0, canvas.width, canvas.height)
+    }
+    resize()
+    window.addEventListener('resize', resize)
 
     const compile = (type: number, src: string) => {
-      const shader = gl.createShader(type)!;
-      gl.shaderSource(shader, src);
-      gl.compileShader(shader);
-      return shader;
-    };
+      const shader = gl.createShader(type)!
+      gl.shaderSource(shader, src)
+      gl.compileShader(shader)
+      return shader
+    }
 
     const vertSrc = `#version 300 es
 precision highp float;
 in vec4 position;
-void main(){gl_Position=position;}`;
+void main(){gl_Position=position;}`
 
-    const vs = compile(gl.VERTEX_SHADER, vertSrc);
-    const fs = compile(gl.FRAGMENT_SHADER, defaultShaderSource);
-    const prog = gl.createProgram()!;
-    gl.attachShader(prog, vs);
-    gl.attachShader(prog, fs);
-    gl.linkProgram(prog);
-    gl.useProgram(prog);
+    const vs = compile(gl.VERTEX_SHADER, vertSrc)
+    const fs = compile(gl.FRAGMENT_SHADER, defaultShaderSource)
+    const prog = gl.createProgram()!
+    gl.attachShader(prog, vs)
+    gl.attachShader(prog, fs)
+    gl.linkProgram(prog)
+    gl.useProgram(prog)
 
-    const buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,1,-1,-1,1,1,1,-1]), gl.STATIC_DRAW);
+    const buf = gl.createBuffer()
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf)
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, 1, -1, -1, 1, 1, 1, -1]),
+      gl.STATIC_DRAW,
+    )
 
-    const pos = gl.getAttribLocation(prog, 'position');
-    gl.enableVertexAttribArray(pos);
-    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+    const pos = gl.getAttribLocation(prog, 'position')
+    gl.enableVertexAttribArray(pos)
+    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0)
 
-    const uRes = gl.getUniformLocation(prog, 'resolution');
-    const uTime = gl.getUniformLocation(prog, 'time');
+    const uRes = gl.getUniformLocation(prog, 'resolution')
+    const uTime = gl.getUniformLocation(prog, 'time')
 
     const loop = (now: number) => {
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, now * 1e-3);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      animFrameRef.current = requestAnimationFrame(loop);
-    };
+      gl.uniform2f(uRes, canvas.width, canvas.height)
+      gl.uniform1f(uTime, now * 1e-3)
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+      animFrameRef.current = requestAnimationFrame(loop)
+    }
 
     // Only animate while visible
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           if (!animFrameRef.current) {
-            animFrameRef.current = requestAnimationFrame(loop);
+            animFrameRef.current = requestAnimationFrame(loop)
           }
         } else {
           if (animFrameRef.current) {
-            cancelAnimationFrame(animFrameRef.current);
-            animFrameRef.current = undefined;
+            cancelAnimationFrame(animFrameRef.current)
+            animFrameRef.current = undefined
           }
         }
       },
-      { threshold: 0 }
-    );
-    observer.observe(canvas);
+      { threshold: 0 },
+    )
+    observer.observe(canvas)
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', resize);
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-      gl.deleteProgram(prog);
-      gl.deleteShader(vs);
-      gl.deleteShader(fs);
-    };
-  }, []);
+      observer.disconnect()
+      window.removeEventListener('resize', resize)
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
+      gl.deleteProgram(prog)
+      gl.deleteShader(vs)
+      gl.deleteShader(fs)
+    }
+  }, [])
 
-  return canvasRef;
-};
+  return canvasRef
+}
 
 const ShaderHero: React.FC<HeroProps> = ({
   trustBadge,
@@ -160,10 +165,12 @@ const ShaderHero: React.FC<HeroProps> = ({
   buttons,
   className = '',
 }) => {
-  const canvasRef = useShaderBackground();
+  const canvasRef = useShaderBackground()
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-black ${className}`}>
+    <div
+      className={`relative w-full h-screen overflow-hidden bg-black ${className}`}
+    >
       <style>{`
         @keyframes shader-fade-down {
           from { opacity: 0; transform: translateY(-20px); }
@@ -203,13 +210,21 @@ const ShaderHero: React.FC<HeroProps> = ({
           <div className="space-y-2">
             <h2
               className="font-bold bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent shader-anim-up shader-delay-200"
-              style={{ fontSize: 'clamp(40px, 8vw, 88px)', letterSpacing: '-2px', lineHeight: 1.05 }}
+              style={{
+                fontSize: 'clamp(40px, 8vw, 88px)',
+                letterSpacing: '-2px',
+                lineHeight: 1.05,
+              }}
             >
               {headline.line1}
             </h2>
             <h2
               className="font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent shader-anim-up shader-delay-400"
-              style={{ fontSize: 'clamp(40px, 8vw, 88px)', letterSpacing: '-2px', lineHeight: 1.05 }}
+              style={{
+                fontSize: 'clamp(40px, 8vw, 88px)',
+                letterSpacing: '-2px',
+                lineHeight: 1.05,
+              }}
             >
               {headline.line2}
             </h2>
@@ -245,7 +260,7 @@ const ShaderHero: React.FC<HeroProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ShaderHero;
+export default ShaderHero

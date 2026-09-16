@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://loc-phan-portfolio.vercel.app/sitemap.xml

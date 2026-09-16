@@ -2,7 +2,14 @@ import { ShaderAnimation } from './ui/shader-animation'
 
 export default function ShaderVisual() {
   return (
-    <div style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#000' }}>
+    <div
+      style={{
+        position: 'relative',
+        height: '100vh',
+        overflow: 'hidden',
+        background: '#000',
+      }}
+    >
       <ShaderAnimation />
 
       {/* Soft dark scrim so the headline stays legible over the bright shader */}
@@ -55,7 +62,9 @@ export default function ShaderVisual() {
             padding: '0 24px',
           }}
         >
-          Always learning.<br />Always building.
+          Always learning.
+          <br />
+          Always building.
         </h2>
         <p
           style={{
@@ -69,7 +78,8 @@ export default function ShaderVisual() {
             padding: '0 24px',
           }}
         >
-          Currently going deep on distributed systems, consensus algorithms, and AI infrastructure.
+          Currently going deep on distributed systems, consensus algorithms, and
+          AI infrastructure.
         </p>
       </div>
 
