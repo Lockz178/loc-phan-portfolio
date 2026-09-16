@@ -12,7 +12,7 @@ export default function About() {
     <section className="section tile-parchment" id="about">
       <div className="about-inner container">
         <FadeIn className="about-photo-wrap" x={-32} y={0}>
-          <img src="/avatar.png" alt="Phan Ngoc Phuoc Loc" className="avatar" />
+          <img src="/avatar.jpg" alt="Phan Ngoc Phuoc Loc" className="avatar" />
           <div className="about-origin-badge">
             <span>🇻🇳</span> Ho Chi Minh City → <span>🇫🇮</span> Tampere
           </div>
