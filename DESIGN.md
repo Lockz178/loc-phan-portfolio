@@ -53,10 +53,10 @@ Both fonts are self-hosted through `@fontsource-variable` packages.
 ## Motion
 
 - Easing tokens: `--ease-out` `cubic-bezier(0.23, 1, 0.32, 1)` for UI,
-  `--ease-expo` `cubic-bezier(0.16, 1, 0.3, 1)` for entrances and reveals.
+  `--ease-expo` `cubic-bezier(0.16, 1, 0.3, 1)` for entrances.
 - The cluster is the one authored motion moment. The hero text rises once on
-  load (80 ms stagger) and project screenshots reveal with a clip-path wipe
-  the first time they scroll into view.
+  load (80 ms stagger). Nothing fades or slides in on scroll: content is
+  simply there.
 - Presses scale to `0.97`; hover effects only apply under
   `(hover: hover) and (pointer: fine)`.
 - `prefers-reduced-motion` removes entrance animation, travelling messages and

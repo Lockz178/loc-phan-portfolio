@@ -1,5 +1,4 @@
 import { ArrowUpRight, GithubLogo } from '@phosphor-icons/react'
-import { useReveal } from '../lib/hooks'
 import './Projects.css'
 
 function Stack({ items }) {
@@ -23,9 +22,8 @@ function SourceLink({ href }) {
 }
 
 function Shot({ src, srcSet, sizes, alt, width, height, variant = '' }) {
-  const ref = useReveal()
   return (
-    <figure className={`shot ${variant}`} ref={ref}>
+    <figure className={`shot ${variant}`}>
       <img
         src={src}
         srcSet={srcSet}

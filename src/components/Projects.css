@@ -118,18 +118,6 @@
   border-radius: 20px;
 }
 
-.shot[data-reveal="armed"] {
-  opacity: 0;
-  transform: translateY(24px);
-  clip-path: inset(12% 0 0 0 round var(--r-lg));
-}
-
-.shot[data-reveal="in"] {
-  clip-path: inset(0 0 0 0 round var(--r-lg));
-  transition: clip-path 1000ms var(--ease-expo), transform 1000ms var(--ease-expo),
-    opacity 500ms ease;
-}
-
 .project-pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
