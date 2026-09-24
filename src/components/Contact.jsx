@@ -1,95 +1,107 @@
-import { motion, useInView } from 'motion/react'
-import { useRef } from 'react'
-import FadeIn from './FadeIn'
-import { SpecialText } from './ui/special-text'
+import {
+  ArrowUpRight,
+  Check,
+  Copy,
+  DownloadSimple,
+  GithubLogo,
+  LinkedinLogo,
+} from '@phosphor-icons/react'
+import { useEffect, useRef, useState } from 'react'
+import './Contact.css'
 
-const channels = [
-  {
-    icon: '✉',
-    label: 'Email',
-    value: 'phuocloc5406@gmail.com',
-    href: 'mailto:phuocloc5406@gmail.com',
-  },
-  {
-    icon: '⌥',
-    label: 'GitHub',
-    value: 'github.com/Lockz178',
-    href: 'https://github.com/Lockz178',
-  },
-  {
-    icon: 'in',
-    label: 'LinkedIn',
-    value: 'Ngoc Phuoc Loc Phan',
-    href: 'https://www.linkedin.com/in/ngoc-phuoc-loc-phan-117146330/',
-  },
-]
+const EMAIL = 'phuocloc5406@gmail.com'
 
-function ContactCard({ channel, delay }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px 0px' })
+function CopyButton() {
+  const [state, setState] = useState('idle') // idle | copied | failed
+  const timer = useRef(0)
+  useEffect(() => () => clearTimeout(timer.current), [])
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL)
+      setState('copied')
+    } catch {
+      setState('failed')
+    }
+    clearTimeout(timer.current)
+    timer.current = setTimeout(() => setState('idle'), 2200)
+  }
+
+  const label = {
+    idle: 'Copy address',
+    copied: 'Copied',
+    failed: 'Copy failed, select the address instead',
+  }[state]
 
   return (
-    <motion.a
-      ref={ref}
-      href={channel.href}
-      target={channel.href.startsWith('mailto') ? '_self' : '_blank'}
-      rel="noopener"
-      className="contact-card"
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay, ease: [0.25, 0.1, 0.25, 1] }}
-      whileHover={{ y: -4 }}
+    <button
+      type="button"
+      className="btn btn-ink btn-sm copy-btn"
+      data-state={state}
+      onClick={copy}
     >
-      <span className="contact-card-icon">{channel.icon}</span>
-      <div>
-        <p className="contact-card-label">{channel.label}</p>
-        <p className="contact-card-value">{channel.value}</p>
-      </div>
-      <svg
-        className="contact-card-arrow"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M3 13L13 3M13 3H6M13 3V10"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </motion.a>
+      <span className="copy-btn-label" key={state}>
+        {state === 'copied' ? (
+          <Check size={16} weight="bold" aria-hidden="true" />
+        ) : (
+          <Copy size={16} weight="bold" aria-hidden="true" />
+        )}
+        {label}
+      </span>
+      <span className="sr-only" aria-live="polite">
+        {state === 'copied' ? 'Email address copied to clipboard' : ''}
+      </span>
+    </button>
   )
 }
 
 export default function Contact() {
   return (
-    <section className="section tile-light" id="contact">
+    <section id="contact" className="contact" aria-labelledby="contact-title">
       <div className="container">
-        <FadeIn>
-          <p className="section-eyebrow">
-            <SpecialText inView={true} speed={16}>
-              Let's Connect
-            </SpecialText>
-          </p>
-          <h2 className="section-headline">Get in Touch</h2>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <p className="contact-intro">
-            I'm open to internship opportunities, junior developer roles, and
-            interesting software projects. Feel free to reach out through any of
-            these channels.
-          </p>
-        </FadeIn>
-
-        <div className="contact-cards">
-          {channels.map((c, i) => (
-            <ContactCard key={c.label} channel={c} delay={i * 0.1} />
-          ))}
+        <h2 id="contact-title" className="contact-title">
+          Get in touch
+        </h2>
+        <p className="contact-lede">
+          I’m open to internship opportunities, junior developer roles, and
+          interesting software projects.
+        </p>
+        <div className="contact-email-row">
+          <a href={`mailto:${EMAIL}`} className="contact-email">
+            {EMAIL}
+          </a>
+          <CopyButton />
         </div>
+        <ul className="contact-links">
+          <li>
+            <a
+              href="https://github.com/Lockz178"
+              target="_blank"
+              rel="noopener"
+            >
+              <GithubLogo size={20} aria-hidden="true" />
+              GitHub
+              <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/ngoc-phuoc-loc-phan-117146330/"
+              target="_blank"
+              rel="noopener"
+            >
+              <LinkedinLogo size={20} aria-hidden="true" />
+              LinkedIn
+              <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a href="/cv.pdf" download>
+              <DownloadSimple size={20} aria-hidden="true" />
+              Download CV
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
   )

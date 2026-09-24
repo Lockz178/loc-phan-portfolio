@@ -1,0 +1,94 @@
+/* ── Contact ──────────────────────────────────────────────── */
+.contact {
+  --focus: var(--on-signal);
+  padding-block: clamp(96px, 12vw, 176px) clamp(104px, 13vw, 184px);
+  background: var(--signal);
+  color: var(--on-signal);
+}
+
+.contact ::selection {
+  background: var(--on-signal);
+  color: var(--signal);
+}
+
+.contact-title {
+  font-size: clamp(2.75rem, 1.5rem + 5vw, 5.25rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.contact-lede {
+  max-width: 42ch;
+  margin-top: 20px;
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.contact-email-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: clamp(40px, 6vw, 72px);
+}
+
+.contact-email {
+  font-size: clamp(1.5rem, 0.55rem + 4.4vw, 4.25rem);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  padding-bottom: 0.12em;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 0.055em
+    no-repeat;
+  overflow-wrap: anywhere;
+  transition: background-size 200ms ease;
+}
+
+.copy-btn-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  animation: swap-in 260ms var(--ease-out);
+}
+
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 32px;
+  margin-top: 48px;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--on-signal) 35%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-email:hover {
+    background-size: 100% 0.09em;
+  }
+  .contact-links a:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-btn-label {
+    animation: none;
+  }
+}
