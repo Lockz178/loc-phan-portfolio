@@ -1,0 +1,33 @@
+/* ── Skills ───────────────────────────────────────────────── */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 48px) clamp(20px, 3vw, 40px);
+}
+
+.skill-group h3 {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.skill-group ul {
+  display: grid;
+  gap: 6px;
+  color: var(--ink-2);
+  font-size: 0.96875rem;
+}
+
+.skill-group--now h3 {
+  color: var(--accent);
+  border-bottom-color: color-mix(in oklab, var(--signal) 55%, transparent);
+}
+
+@media (max-width: 1024px) {
+  .skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

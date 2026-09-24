@@ -1,13 +1,9 @@
-import { motion, useInView } from 'motion/react'
-import { useRef } from 'react'
-import FadeIn from './FadeIn'
-import { SpecialText } from './ui/special-text'
+import './Skills.css'
 
-const categories = [
+const GROUPS = [
   {
-    title: 'Programming Languages',
-    icon: '{ }',
-    chips: [
+    title: 'Languages',
+    items: [
       'JavaScript',
       'Python',
       'Dart',
@@ -19,30 +15,26 @@ const categories = [
     ],
   },
   {
-    title: 'Frontend / Mobile',
-    icon: '◻',
-    chips: ['React', 'Flutter', 'Responsive UI', 'HTML/CSS Layouts'],
+    title: 'Frontend and mobile',
+    items: ['React', 'Flutter', 'Responsive UI', 'HTML/CSS layouts'],
   },
   {
     title: 'Backend',
-    icon: '⌁',
-    chips: [
+    items: [
       'Node.js',
       'Express.js',
       'REST APIs',
-      'File Handling',
-      'Server Routing',
+      'File handling',
+      'Server routing',
     ],
   },
   {
-    title: 'Databases & Data',
-    icon: '▤',
-    chips: ['PostgreSQL', 'SQLite', 'Power BI', 'Data Modeling'],
+    title: 'Databases and data',
+    items: ['PostgreSQL', 'SQLite', 'Power BI', 'Data modeling'],
   },
   {
-    title: 'DevOps & Systems',
-    icon: '⚙',
-    chips: [
+    title: 'DevOps and systems',
+    items: [
       'Linux',
       'Ubuntu Server',
       'Apache',
@@ -54,9 +46,8 @@ const categories = [
     ],
   },
   {
-    title: 'Tools & Workflow',
-    icon: '◈',
-    chips: [
+    title: 'Tools and workflow',
+    items: [
       'Git',
       'GitHub',
       'GitLab',
@@ -68,72 +59,42 @@ const categories = [
     ],
   },
   {
-    title: 'Embedded & IoT',
-    icon: '⊞',
-    chips: [
+    title: 'Embedded and IoT',
+    items: [
       'Arduino',
       'ESP8266',
       'Sensors',
-      'Motor Control',
-      'Device Communication',
+      'Motor control',
+      'Device communication',
     ],
+  },
+  {
+    title: 'Exploring now',
+    items: ['Distributed systems', 'Consensus algorithms', 'AI infrastructure'],
+    current: true,
   },
 ]
 
-function SkillCategory({ category, delay }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px 0px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className="skill-card"
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay, ease: [0.25, 0.1, 0.25, 1] }}
-    >
-      <div className="skill-card-header">
-        <span className="skill-icon" aria-hidden="true">
-          {category.icon}
-        </span>
-        <h3 className="skill-cat-title">{category.title}</h3>
-      </div>
-      <div className="skill-chips">
-        {category.chips.map((chip, i) => (
-          <motion.span
-            key={chip}
-            className="chip"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{
-              duration: 0.28,
-              delay: delay + 0.04 * i,
-              ease: 'easeOut',
-            }}
-          >
-            {chip}
-          </motion.span>
-        ))}
-      </div>
-    </motion.div>
-  )
-}
-
 export default function Skills() {
   return (
-    <section className="section tile-light" id="skills">
+    <section id="skills" className="section" aria-labelledby="skills-title">
       <div className="container">
-        <FadeIn>
-          <p className="section-eyebrow">
-            <SpecialText inView={true} speed={18}>
-              Technical Stack
-            </SpecialText>
-          </p>
-          <h2 className="section-headline">Skills</h2>
-        </FadeIn>
-        <div className="skills-grid">
-          {categories.map((cat, i) => (
-            <SkillCategory key={cat.title} category={cat} delay={i * 0.06} />
+        <h2 id="skills-title" className="section-title">
+          Skills
+        </h2>
+        <div className="skills">
+          {GROUPS.map((group) => (
+            <div
+              key={group.title}
+              className={`skill-group${group.current ? ' skill-group--now' : ''}`}
+            >
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </div>
