@@ -1,0 +1,19 @@
+/* ── Footer ───────────────────────────────────────────────── */
+.site-footer {
+  padding-block: 28px;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.site-footer .text-link {
+  color: var(--ink-2);
+  font-weight: 500;
+}
