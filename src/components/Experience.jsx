@@ -1,86 +1,61 @@
-import FadeIn from './FadeIn'
-import { SpecialText } from './ui/special-text'
+import './Experience.css'
 
-const items = [
+const ITEMS = [
   {
-    date: '2025 – Present',
-    type: 'Education',
-    title: 'Bachelor of Engineering · Software Engineering',
+    date: '2025 - Present',
+    kind: 'Education',
+    title: 'Bachelor of Engineering, Software Engineering',
     org: 'Tampere University of Applied Sciences (TAMK)',
-    location: 'Tampere, Finland',
+    place: 'Tampere, Finland',
     desc: 'Full-stack development, systems administration, databases, and practical software project work. Expected graduation 2028. Active participation in school projects involving real client deliverables.',
-    ongoing: true,
   },
   {
-    date: '2024 – Present',
-    type: 'Experience',
-    title: 'Student Developer · Practical Training',
+    date: '2024 - Present',
+    kind: 'Experience',
+    title: 'Student Developer, Practical Training',
     org: 'A3 Info Screen Project',
-    location: 'TAMK · Tampere, Finland',
+    place: 'TAMK, Tampere, Finland',
     desc: 'Built a Raspberry Pi-powered digital signage system with a Node.js/Express backend and HTML/CSS/JS frontend, now deployed and in use on campus. Responsible for the full development cycle: planning, coding, testing, and deployment.',
-    ongoing: true,
   },
   {
-    date: '2024 – 2025',
-    type: 'Education',
-    title: 'Bachelor of Engineering · Information Technology',
+    date: '2024 - 2025',
+    kind: 'Education',
+    title: 'Bachelor of Engineering, Information Technology',
     org: 'South-Eastern Finland University of Applied Sciences (XAMK)',
-    location: 'Mikkeli, Finland',
+    place: 'Mikkeli, Finland',
     desc: 'Completed my first year of IT engineering studies (programming fundamentals, mathematics, and core computing courses) before transferring to TAMK to continue toward Software Engineering.',
   },
 ]
 
 export default function Experience() {
   return (
-    <section className="section tile-light" id="experience">
+    <section
+      id="experience"
+      className="section"
+      aria-labelledby="experience-title"
+    >
       <div className="container">
-        <FadeIn>
-          <p className="section-eyebrow">
-            <SpecialText inView={true} speed={16}>
-              Background
-            </SpecialText>
-          </p>
-          <h2 className="section-headline">Education &amp; Experience</h2>
-        </FadeIn>
-
-        <div className="timeline">
-          {items.map((item, i) => (
-            <FadeIn key={item.title} delay={i * 0.15} x={-24} y={0}>
-              <div
-                className={`timeline-item${item.ongoing ? ' timeline-item--now' : ''}`}
-              >
-                <div className="timeline-left">
-                  <span
-                    className={`timeline-type${item.ongoing ? ' timeline-type--now' : ''}`}
-                  >
-                    {item.type}
-                  </span>
-                  <span className="timeline-date">{item.date}</span>
-                  <span className="timeline-location">{item.location}</span>
-                </div>
-                <div className="timeline-connector">
-                  <div
-                    className={`timeline-dot${item.ongoing ? ' timeline-dot--now' : ''}`}
-                  />
-                  {i < items.length - 1 && <div className="timeline-line" />}
-                </div>
-                <div className="timeline-body">
-                  <h3 className="timeline-title">
-                    {item.title}
-                    {item.ongoing && (
-                      <span className="timeline-now-badge">
-                        <span className="timeline-now-dot" />
-                        Now
-                      </span>
-                    )}
-                  </h3>
-                  <p className="timeline-org">{item.org}</p>
-                  <p className="timeline-desc">{item.desc}</p>
-                </div>
+        <h2 id="experience-title" className="section-title">
+          Education &amp; experience
+        </h2>
+        <ol className="ledger">
+          {ITEMS.map((item) => (
+            <li key={item.title} className="ledger-row">
+              <div className="ledger-when">
+                <span className="ledger-date">{item.date}</span>
+                <span className="ledger-kind">{item.kind}</span>
               </div>
-            </FadeIn>
+              <div className="ledger-body">
+                <h3>{item.title}</h3>
+                <p className="ledger-org">
+                  {item.org}
+                  <span>{item.place}</span>
+                </p>
+                <p className="ledger-desc">{item.desc}</p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )

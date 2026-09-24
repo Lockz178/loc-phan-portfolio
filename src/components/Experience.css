@@ -1,0 +1,67 @@
+/* ── Experience ───────────────────────────────────────────── */
+.ledger-row {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: 16px 32px;
+  padding-block: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.ledger-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.ledger-date {
+  display: block;
+  color: var(--ink);
+  font: 500 0.875rem/1.6 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.ledger-kind {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+
+.ledger-body h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.ledger-org {
+  margin-top: 6px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.ledger-org span {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.ledger-desc {
+  max-width: 64ch;
+  margin-top: 14px;
+  color: var(--ink-2);
+}
+
+@media (max-width: 700px) {
+  .ledger-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ledger-when {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .ledger-kind {
+    margin-top: 0;
+  }
+}
