@@ -14,7 +14,7 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <meta name="color-scheme" content="dark light" />
-    <meta name="theme-color" content="#0d0d0f" />
+    <meta name="theme-color" content="#111317" />
 
     <!-- Open Graph / Facebook, LinkedIn -->
     <meta property="og:type" content="profile" />
@@ -37,13 +37,11 @@
         try {
           if (localStorage.getItem('theme') === 'light') {
             document.documentElement.classList.remove('dark');
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f5f6f8');
           }
         } catch {}
       })();
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <script type="application/ld+json">
       {
